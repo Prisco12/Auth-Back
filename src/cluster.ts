@@ -1,25 +1,16 @@
-const os = require('os');
-const cluster = require('cluster');
+const os = require('os') 
+const cluster = require('cluster') 
 
 const runPrimaryProcess = () => {
-  const processCount = 13;
-  console.log(`Primary ${process.pid} is running`);
-  console.log(`Forking Server with ${processCount} processes \n`);
-  for (let i = 0; i < processCount; i++) {
-    cluster.fork();
-  }
+    const processesCount = 2 //os.cpus().length
+    console.log(`Primary ${process.pid} is running`)
+    console.log(`Forking Server with ${processesCount} process \n`)
 
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(
-      `Worker ${worker.process.pid} died with code: ${code}, and signal: ${signal}`,
-    );
-    console.log('Starting a new worker');
-    cluster.fork();
-  });
-};
+    for(let index = 0; index < processesCount; index++) cluster.fork
+}
 
 const runWorkerProcess = async () => {
-  await import('./main');
-};
+    await import('./main')
+}
 
-cluster.isPrimary ? runPrimaryProcess() : runWorkerProcess();
+cluster.isPrimary ? runPrimaryProcess() : runWorkerProcess()

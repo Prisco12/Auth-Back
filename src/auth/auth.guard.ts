@@ -32,7 +32,7 @@ import { IS_PUBLIC_KEY } from './decorators/auth.decorator';
         const payload = await this.jwtService.verifyAsync(
           token,
           {
-            secret: jwtConstants.secret
+            secret: process.env.JWT_SECRET
           }
         );
         // 💡 We're assigning the payload to the request object here
