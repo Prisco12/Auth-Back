@@ -2,12 +2,11 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes } from '@ne
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ZodValidationPipe } from '@abitia/zod-dto';
 import { Public } from 'src/auth/decorators/auth.decorator';
+// import { ZodValidationPipe } from '@abitia/zod-dto';
 
 
 @Controller('users')
-@UsePipes(ZodValidationPipe)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

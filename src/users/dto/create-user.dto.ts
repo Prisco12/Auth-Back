@@ -1,38 +1,41 @@
-import { createZodDto } from '@abitia/zod-dto';
-import { IsString, IsNumber, IsNotEmpty, Max, IsEmail } from 'class-validator';
-import { z } from 'zod'
+import { IsString, IsNumber, IsNotEmpty, Max, IsEmail, Min } from 'class-validator';
 
 
-
-export const createUserSchema =  z.object({
-    name: z.string().nonempty('O nome é obrigatorio'),
-    password: z.string().min(6, 'Minimo de 6 caracteres'),
-    age: z.number({
-        required_error: 'O campo idade é obrigatório',
-        invalid_type_error: 'Caracteres inseridos são invalidos'
-    }).min(18, "Idade minima é de 18 anos").max(100),
-    email: z.string().nonempty('O email é obrigatorio').email('Formato do email é invalido'),
-}).required()
-
-export class CreateUserDto extends createZodDto(createUserSchema) {}
-
-
-// export class CreateUserDto{
-//     @IsString()
-//     @IsNotEmpty()
-//     name: string
+export class CreateUserDto{
+    @IsString()
+    @IsNotEmpty()
+    name: string
     
-//     @IsString()
-//     @IsNotEmpty()
-//     password: string
+    @IsString()
+    @IsNotEmpty()
+    @Min(6)
+    password: string
+    
+    @IsNotEmpty()
+    @IsNumber()
+    @Min(18)
+    age: number
+    
+    @IsNotEmpty()
+    @IsEmail()
+    email: string
+    
+    
+}
 
-//     @IsNumber()
-//     @Max(100)
-//     age: number
-
-//     @IsEmail()
-//     email: string
+// import { createZodDto } from '@abitia/zod-dto';
+// import { z } from 'zod'
 
 
-// }
 
+// export const createUserSchema =  z.object({
+//     name: z.string().nonempty('O nome é obrigatorio'),
+//     password: z.string().min(6, 'Minimo de 6 caracteres'),
+//     age: z.number({
+//         required_error: 'O campo idade é obrigatório',
+//         invalid_type_error: 'Caracteres inseridos são invalidos'
+//     }).min(18, "Idade minima é de 18 anos").max(100),
+//     email: z.string().nonempty('O email é obrigatorio').email('Formato do email é invalido'),
+// }).required()
+
+// export class CreateUserDto extends createZodDto(createUserSchema) {}
