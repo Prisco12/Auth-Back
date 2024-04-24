@@ -17,7 +17,7 @@ export const createUserSchema =  z.object({
 export class CreateUserDto extends createZodDto(createUserSchema) {}
 
 
-// {
+// export class CreateUserDto{
 //     @IsString()
 //     @IsNotEmpty()
 //     name: string
